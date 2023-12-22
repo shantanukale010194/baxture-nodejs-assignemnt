@@ -5,7 +5,6 @@
     "outDir": "./dist",
     "strict": true,
     "esModuleInterop": true
-    // ... other options
   },
   "include": ["src/**/*.ts"],
   "exclude": ["node_modules"]

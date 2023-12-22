@@ -1,8 +1,8 @@
 import express from 'express';
-import {UserRoutes} from './src/routes';
+import {UserRoutes} from './routes';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJSDoc from 'swagger-jsdoc';
-import { UserService } from './src/services';
+import { UserService } from './services';
 
 const app = express();
 const PORT = 3000;
