@@ -16,9 +16,9 @@ const options: swaggerJSDoc.Options = {
   definition: {
     openapi: "3.1.0",
     info: {
-      title: "Express API with Swagger",
+      title: "Baxture nodejs assignment with Swagger UI",
       version: "1.0.0",
-      description: "API documentation for your Express application",
+      description: "baxture-nodejs-assignemnt",
     },
   },
   apis: ["./src/routes/user.routes.ts"],
@@ -29,8 +29,6 @@ const swaggerSpec = swaggerJSDoc(options);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use(express.json());
 app.use(userRoutes.setupRoutes());
-
-
 
 if (cluster.isPrimary) {
   // Start the data manager in the primary process
@@ -52,7 +50,9 @@ if (cluster.isPrimary) {
   const workerPort = process.env.workerPort || PORT;
 
   // Access the shared in-memory database instance directly
-   InMemoryDatabase.getInstance();
+  InMemoryDatabase.getInstance();
+
+  //Listening all Ports with swagger UI endpoint (CLICK SwaggerUI endpoint for API documentations)
   app.listen(workerPort, () => {
     console.log(
       `Worker ${cluster.worker?.id} is running on http://localhost:${workerPort}, SwaggerUI on  http://localhost:${workerPort}/api-docs `

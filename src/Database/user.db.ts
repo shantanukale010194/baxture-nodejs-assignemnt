@@ -1,5 +1,8 @@
 import { UserDetailsInterface } from "../interface";
 
+/**
+ * In Memory Database class for user data management
+ */
 export class InMemoryDatabase {
   private static instance: InMemoryDatabase;
   private users: UserDetailsInterface[];
