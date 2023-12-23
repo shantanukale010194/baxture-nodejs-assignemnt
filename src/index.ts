@@ -3,9 +3,12 @@ import {UserRoutes} from './routes';
 import swaggerUi from 'swagger-ui-express';
 import swaggerJSDoc from 'swagger-jsdoc';
 import { UserService } from './services';
+import dotenv from 'dotenv';
+dotenv.config();
+
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 const userRoutes = new UserRoutes(new UserService());
 
@@ -29,7 +32,7 @@ app.use(express.json());
 app.use(userRoutes.setupRoutes());
 
 
-
+export default app;
 
 
 app.listen(PORT, () => {

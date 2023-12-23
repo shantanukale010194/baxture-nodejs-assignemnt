@@ -1,5 +1,5 @@
 import request from 'supertest';
-import app from '../index'; // Import your Express app instance
+import app from '../index';
 
 describe('API Tests', () => {
   let createdUserId: string;
@@ -12,14 +12,15 @@ describe('API Tests', () => {
 
   it('should create a new object by a POST api/users request (a response containing newly created record is expected)', async () => {
     const newUser = {
-      name: 'John Doe',
-      email: 'john@example.com',
+      username: 'John Doe',
+      age: '30',
+      hobby: ['Cricket','Painting']
     };
 
     const response = await request(app).post('/api/users').send(newUser);
     expect(response.status).toBe(201);
     expect(response.body).toHaveProperty('userId');
-    createdUserId = response.body.userId; // Save the created user ID for future tests
+    createdUserId = response.body.userId;
   });
 
   it('should get the created record by its id with a GET api/user/{userId} request (the created record is expected)', async () => {
@@ -30,15 +31,17 @@ describe('API Tests', () => {
 
   it('should update the created record with a PUT api/users/{userId} request (a response is expected containing an updated object with the same id)', async () => {
     const updatedUser = {
-      name: 'Updated Name',
-      email: 'updated@example.com',
+      username: 'Updated Name',
+      age: '40',
+      hobby: ['Cricket','Painting']
     };
 
     const response = await request(app).put(`/api/users/${createdUserId}`).send(updatedUser);
     expect(response.status).toBe(200);
     expect(response.body.userId).toBe(createdUserId);
-    expect(response.body.name).toBe(updatedUser.name);
-    expect(response.body.email).toBe(updatedUser.email);
+    expect(response.body.username).toBe(updatedUser.username);
+    expect(response.body.hobby).toStrictEqual(updatedUser.hobby);
+    expect(response.body.age).toBe(updatedUser.age);
   });
 
   it('should delete the created object by id with a DELETE api/users/{userId} request (confirmation of successful deletion is expected)', async () => {
