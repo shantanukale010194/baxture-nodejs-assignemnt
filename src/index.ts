@@ -4,12 +4,12 @@ import swaggerUi from 'swagger-ui-express';
 import swaggerJSDoc from 'swagger-jsdoc';
 import { UserService } from './services';
 import dotenv from 'dotenv';
+
 dotenv.config();
 
 
 const app = express();
 const PORT = process.env.PORT || 3000;
-
 const userRoutes = new UserRoutes(new UserService());
 
 // Serve Swagger UI
@@ -34,7 +34,6 @@ app.use(userRoutes.setupRoutes());
 
 export default app;
 
-
 app.listen(PORT, () => {
-  console.log(`Server is running on http://localhost:${PORT}`);
-});
+  console.log(`Server is running on http://localhost:${PORT}, SwaggerUI on  http://localhost:${PORT}/api-docs`);
+ });

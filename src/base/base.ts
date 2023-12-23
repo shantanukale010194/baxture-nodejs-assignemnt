@@ -1,4 +1,4 @@
-import { InMemoryDatabase } from '../Database'
+import { InMemoryDatabase } from '../database'
 
 
 export class BaseClass {

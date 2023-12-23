@@ -1,9 +1,8 @@
-import { UserDetailsInterface} from '../interface';
+import { UserDetailsInterface } from "../interface";
 
 export class InMemoryDatabase {
   private static instance: InMemoryDatabase;
   private users: UserDetailsInterface[];
-
   public constructor() {
     this.users = [];
   }
@@ -12,8 +11,11 @@ export class InMemoryDatabase {
     if (!InMemoryDatabase.instance) {
       InMemoryDatabase.instance = new InMemoryDatabase();
     }
-
     return InMemoryDatabase.instance;
+  }
+
+  static setInstance(instance: InMemoryDatabase) {
+    InMemoryDatabase.instance = instance;
   }
 
   getUsers(): UserDetailsInterface[] {
@@ -21,7 +23,7 @@ export class InMemoryDatabase {
   }
 
   getUserById(userId: string): UserDetailsInterface | undefined {
-    return this.users.find(user => user.userId === userId);
+    return this.users.find((user) => user.userId === userId);
   }
 
   createUser(user: UserDetailsInterface): UserDetailsInterface {
@@ -30,8 +32,12 @@ export class InMemoryDatabase {
     return newUser;
   }
 
-  updateUser(updatedUser: UserDetailsInterface): UserDetailsInterface | undefined {
-    const index = this.users.findIndex(user => user.userId === updatedUser.userId);
+  updateUser(
+    updatedUser: UserDetailsInterface
+  ): UserDetailsInterface | undefined {
+    const index = this.users.findIndex(
+      (user) => user.userId === updatedUser.userId
+    );
 
     if (index !== -1) {
       this.users[index] = { ...this.users[index], ...updatedUser };
@@ -43,7 +49,7 @@ export class InMemoryDatabase {
 
   deleteUser(userId: string): boolean {
     const initialLength = this.users.length;
-    this.users = this.users.filter(user => user.userId !== userId);
+    this.users = this.users.filter((user) => user.userId !== userId);
     return this.users.length !== initialLength;
   }
 }
